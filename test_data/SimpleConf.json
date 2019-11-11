@@ -1,0 +1,54 @@
+{
+	"app_name": "SimpleConf",
+    "categories":
+        [
+            {
+                "name": "svn utils",
+                "scripts":
+                    [
+                        {
+                            "name": "checkout",
+                            "script": "C:/path/to/the/script",
+                            "options":
+                                [
+                                    {
+                                        "name": "fast_mode",
+                                        "type": "boolean",
+                                        "default_value": true,
+										"description": "this is a description!",
+										"literal": "--fast_mode"
+                                    },
+                                    {
+                                        "name": "username",
+                                        "type": "string",
+                                        "default_value": "",
+										"description": "this is a description!",
+										"literal": "--username"
+                                    },
+                                    {
+                                        "name": "path_to_checkout",
+                                        "type": "path",
+                                        "default_value": "",
+										"description": "this is a description!",
+										"literal": "--dir"
+                                    }                                
+                                ]
+						},
+						{
+                            "name": "dummy",
+                            "script": "C:/path/to/the/script",
+                            "options":
+                                [                                
+                                ]
+                        }
+                    ]
+			},
+			{
+				"name": "empty_for_test",
+				"scripts": 
+					[
+
+					]
+			}
+        ]
+}
