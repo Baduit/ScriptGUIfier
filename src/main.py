@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import json
+import subprocess
 
 import tkinter as tk
 from tkinter import ttk
@@ -35,7 +36,7 @@ class OptionWrapper:
 	def __init__(self, parent_widget, json_conf):
 		self.name = json_conf["name"]
 		self.type = ''
-		self.literal = ''
+		self.literal = json_conf["literal"]
 		self.frame = ttk.Frame(parent_widget)
 		
 		process_good = True
@@ -70,6 +71,11 @@ class Script:
 		self.exec_button.grid(column = nb_max_option + 1, row = self.row, padx = 5)
 
 	def execute(self):
+		cmd = []
+		cmd.append(self.script_path)
+		# Iterate over the argument to fill the cmd
+		subprocess.Popen(cmd)
+
 		pass
 
 class Category:
