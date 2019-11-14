@@ -2,6 +2,7 @@
 
 import json
 import subprocess
+import argparse
 
 import tkinter as tk
 from tkinter import ttk
@@ -152,7 +153,11 @@ class GUI:
 		self.form.mainloop()
 
 def main():
-	with open("./test_data/SimpleConf.json", "r") as read_file:
+	parser = argparse.ArgumentParser(description='Graphical user interface for YololTranslator')
+	parser.add_argument('-c', '--config', default='./test_data/SimpleConf.json', help='Path of the config file')
+	args = parser.parse_args()
+
+	with open(args.config, "r") as read_file:
 		conf = json.load(read_file)
 
 	gui = GUI(conf)
