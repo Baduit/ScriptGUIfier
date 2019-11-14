@@ -36,9 +36,41 @@
 						},
 						{
                             "name": "dummy",
-                            "script": "C:/path/to/the/script",
+                            "script": ".\\test_data\\dummy.bat",
                             "options":
                                 [                                
+                                ]
+                        },
+						{
+                            "name": "dummy py",
+                            "script": ".\\test_data\\dummy.py",
+                            "options":
+                                [
+                                    {
+                                        "name": "pretty?",
+                                        "type": "boolean",
+                                        "default_value": true,
+										"description": "this is a description!",
+										"literal": "--pretty"
+                                    },
+                                    {
+                                        "name": "sentence to say",
+                                        "type": "string",
+                                        "default_value": "none",
+										"description": "this is a description!",
+										"literal": "--endpoint"
+                                    },
+                                    {
+                                        "name": "not pretty sentence",
+                                        "type": "combo_box",
+                                        "values": 
+                                            [
+                                                "Hey",
+                                                "Yo"
+                                            ],
+										"description": "this is a description!",
+										"literal": "--other"
+                                    }                                 
                                 ]
                         }
                     ]

@@ -6,6 +6,21 @@ import subprocess
 import tkinter as tk
 from tkinter import ttk
 
+class ListOption:
+	def __init__(self, name, parent_widget, values):
+		self.frame = ttk.Frame(parent_widget)
+
+		self.label = ttk.Label(self.frame, text = name)
+		self.label.grid(column = 0, row = 0, padx = 5)
+
+		self.combo_box = ttk.Combobox(self.frame)
+		self.combo_box.grid(column = 1, row = 0, padx = 5)
+		self.combo_box['values'] = values
+		self.combo_box.current(0)
+
+	def retrieve_value(self):
+		return self.combo_box.get()
+
 class InputOption:
 	def __init__(self, name, parent_widget, default_input_text):
 		self.frame = ttk.Frame(parent_widget)
@@ -35,22 +50,26 @@ class BoolOption:
 class OptionWrapper:
 	def __init__(self, parent_widget, json_conf):
 		self.name = json_conf["name"]
-		self.type = ''
+		self.type = json_conf["type"]
 		self.literal = json_conf["literal"]
 		self.frame = ttk.Frame(parent_widget)
 		
 		process_good = True
-		option_type = json_conf["type"]
-		if option_type == 'boolean':
+		if self.type == 'boolean':
 			self.option = BoolOption(self.name, self.frame, json_conf["default_value"])
-		elif option_type == 'string' or option_type == 'path':
+		elif self.type == 'string' or self.type == 'path':
 			self.option = InputOption(self.name, self.frame, json_conf["default_value"])
+		elif self.type == 'combo_box':
+			self.option = ListOption(self.name, self.frame, json_conf["values"])
 		else:
 			process_good = False
-			print("Option: " + self.name + " unknown option type: " + option_type)
+			print("Option: " + self.name + " unknown option type: " + self.type)
 		
 		if process_good:
 			self.option.frame.grid(column = 0, row = 0, padx = 5)
+
+	def retrieve_value(self):
+		return self.option.retrieve_value()
 
 class Script:
 	def __init__(self, parent_widget, json_conf, row, nb_max_option):
@@ -67,14 +86,22 @@ class Script:
 			self.options.append(new_option)
 			i += 1
 
-		self.exec_button = ttk.Button(parent_widget, text = "Start")
+		self.exec_button = ttk.Button(parent_widget, text = "Start", command = self.execute)
 		self.exec_button.grid(column = nb_max_option + 1, row = self.row, padx = 5)
 
 	def execute(self):
 		cmd = []
 		cmd.append(self.script_path)
-		# Iterate over the argument to fill the cmd
-		subprocess.Popen(cmd)
+		for opt in self.options:
+			if opt.type == 'boolean':
+				if opt.retrieve_value():
+					cmd.append(opt.literal)
+			elif opt.type == 'string' or opt.type == 'path' or opt.type == 'combo_box':
+				cmd.append(opt.literal)
+				cmd.append(opt.retrieve_value())
+			else:
+				pass # Not supposed to happend. Log? Throw? Show an image with cute kittens?
+		subprocess.Popen(cmd, shell=True)
 
 		pass
 
