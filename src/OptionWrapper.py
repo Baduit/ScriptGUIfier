@@ -11,6 +11,7 @@ class OptionWrapper:
 		self.name = json_conf["name"] if "name" in json_conf else self.literal
 		self.type = json_conf["type"]
 		self.frame = ttk.Frame(parent_widget)
+		self.frame.config(relief=tk.SOLID)
 		
 		process_good = True
 		if self.type == 'boolean':

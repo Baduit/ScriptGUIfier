@@ -12,6 +12,7 @@ class Script:
 		self.row = row
 		self.label_name = ttk.Label(parent_widget, text = json_conf["name"])
 		self.label_name.grid(column = 0, row = self.row, padx = 5)
+		self.label_name.config(relief=tk.SOLID)
 
 		self.options = []
 		i = 1
