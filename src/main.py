@@ -51,7 +51,7 @@ class BoolOption:
 		self.check_box_var = tk.IntVar()
 		self.check_box_widget = ttk.Checkbutton(parent_widget, text = name, variable = self.check_box_var)
 		self.frame = self.check_box_widget
-		if json_conf["default_value"]:
+		if "default_value" in json_conf and json_conf["default_value"]:
 			self.check_box_var.set(1)	
 		else:
 			self.check_box_var.set(0)
