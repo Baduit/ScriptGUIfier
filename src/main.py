@@ -98,8 +98,10 @@ class Script:
 				if opt.retrieve_value():
 					cmd.append(opt.literal)
 			elif opt.type == 'string' or opt.type == 'path' or opt.type == 'combo_box':
-				cmd.append(opt.literal)
-				cmd.append(opt.retrieve_value())
+				retrieved_value = opt.retrieve_value()
+				if retrieved_value != '':
+					cmd.append(opt.literal)
+					cmd.append(retrieved_value)
 			else:
 				pass # Not supposed to happend. Log? Throw? Show an image with cute kittens?
 		subprocess.Popen(cmd, shell=True)
