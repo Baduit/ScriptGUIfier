@@ -7,13 +7,15 @@ from Options.ListOption import ListOption
 
 class OptionWrapper:
 	def __init__(self, parent_widget, json_conf):
-		self.name = json_conf["name"]
+		self.literal = json_conf["literal"] if "literal" in json_conf else ""
+		self.name = json_conf["name"] if "name" in json_conf else self.literal
 		self.type = json_conf["type"]
-		self.literal = json_conf["literal"]
 		self.frame = ttk.Frame(parent_widget)
 		
 		process_good = True
 		if self.type == 'boolean':
+			if self.literal == "":
+				raise AssertionError("A boolean option MUST have a literal")
 			self.option = BoolOption(self.name, self.frame, json_conf)
 		elif self.type == 'string' or self.type == 'path':
 			self.option = InputOption(self.name, self.frame, json_conf)
