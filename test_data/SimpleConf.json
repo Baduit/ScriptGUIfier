@@ -28,7 +28,7 @@
                                     {
                                         "name": "path_to_checkout",
                                         "type": "path",
-                                        "default_value": "",
+                                        "default_value_from_script": "echo lol",
 										"description": "this is a description!",
 										"literal": "--dir"
                                     }                                

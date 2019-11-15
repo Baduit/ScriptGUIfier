@@ -1,5 +1,6 @@
 import json
 import os
+import subprocess
 
 import tkinter as tk
 from tkinter import ttk
@@ -21,8 +22,15 @@ class InputOption:
 			return json_conf["default_value"]
 		elif "default_value_from_env" in json_conf:
 			return os.environ[json_conf["default_value_from_env"]]
+		elif "default_value_from_script" in json_conf:
+			return self._get_stdout_from_subprocess(json_conf["default_value_from_script"])
 		else:
 			return ""
+
+	def _get_stdout_from_subprocess(self, process_name):
+		process = subprocess.Popen(process_name, stdout=subprocess.PIPE, shell=True)
+		stdout, _ = process.communicate()
+		return stdout
 
 	def retrieve_value(self):
 		return self.input_value.get()
