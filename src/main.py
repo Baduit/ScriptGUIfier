@@ -3,12 +3,13 @@
 import json
 import subprocess
 import argparse
+import os
 
 import tkinter as tk
 from tkinter import ttk
 
 class ListOption:
-	def __init__(self, name, parent_widget, values):
+	def __init__(self, name, parent_widget, json_conf):
 		self.frame = ttk.Frame(parent_widget)
 
 		self.label = ttk.Label(self.frame, text = name)
@@ -16,31 +17,41 @@ class ListOption:
 
 		self.combo_box = ttk.Combobox(self.frame)
 		self.combo_box.grid(column = 1, row = 0, padx = 5)
-		self.combo_box['values'] = values
+		self.combo_box['values'] = json_conf["values"]
 		self.combo_box.current(0)
 
 	def retrieve_value(self):
 		return self.combo_box.get()
 
 class InputOption:
-	def __init__(self, name, parent_widget, default_input_text):
+	def __init__(self, name, parent_widget, json_conf):
 		self.frame = ttk.Frame(parent_widget)
+
 		self.label = ttk.Label(self.frame, text = name)
 		self.label.grid(column = 0, row = 0, padx = 5)
+
 		self.input_value = tk.StringVar()
 		self.input_widget = ttk.Entry(self.frame, textvariable = self.input_value)
 		self.input_widget.grid(column = 1, row = 0, padx = 5)
-		self.input_value.set(default_input_text)
+		self.input_value.set(self._extract_default_value(json_conf))
+
+	def _extract_default_value(self, json_conf):
+		if "default_value" in json_conf:
+			return json_conf["default_value"]
+		elif "default_value_from_env" in json_conf:
+			return os.environ[json_conf["default_value_from_env"]]
+		else:
+			return ""
 
 	def retrieve_value(self):
 		return self.input_value.get()
 
 class BoolOption:
-	def __init__(self, name, parent_widget, default_value):
+	def __init__(self, name, parent_widget, json_conf):
 		self.check_box_var = tk.IntVar()
 		self.check_box_widget = ttk.Checkbutton(parent_widget, text = name, variable = self.check_box_var)
 		self.frame = self.check_box_widget
-		if default_value:
+		if json_conf["default_value"]:
 			self.check_box_var.set(1)	
 		else:
 			self.check_box_var.set(0)
@@ -57,11 +68,11 @@ class OptionWrapper:
 		
 		process_good = True
 		if self.type == 'boolean':
-			self.option = BoolOption(self.name, self.frame, json_conf["default_value"])
+			self.option = BoolOption(self.name, self.frame, json_conf)
 		elif self.type == 'string' or self.type == 'path':
-			self.option = InputOption(self.name, self.frame, json_conf["default_value"])
+			self.option = InputOption(self.name, self.frame, json_conf)
 		elif self.type == 'combo_box':
-			self.option = ListOption(self.name, self.frame, json_conf["values"])
+			self.option = ListOption(self.name, self.frame, json_conf)
 		else:
 			process_good = False
 			print("Option: " + self.name + " unknown option type: " + self.type)

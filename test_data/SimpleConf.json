@@ -21,7 +21,7 @@
                                     {
                                         "name": "username",
                                         "type": "string",
-                                        "default_value": "",
+                                        "default_value_from_env": "USERNAME",
 										"description": "this is a description!",
 										"literal": "--username"
                                     },
