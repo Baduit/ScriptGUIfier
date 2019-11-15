@@ -1,9 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
 
-from BooleanOption import BoolOption
-from InputOption import InputOption
-from ListOption import ListOption
+from Options.BooleanOption import BoolOption
+from Options.InputOption import InputOption
+from Options.ListOption import ListOption
 
 class OptionWrapper:
 	def __init__(self, parent_widget, json_conf):
