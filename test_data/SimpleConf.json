@@ -12,7 +12,6 @@
                             "options":
                                 [
                                     {
-                                        "name": "fast_mode",
                                         "type": "boolean",
                                         "default_value": true,
 										"description": "this is a description!",
