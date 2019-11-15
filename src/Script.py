@@ -15,11 +15,12 @@ class Script:
 
 		self.options = []
 		i = 1
-		for option_description in json_conf["options"]:
-			new_option = OptionWrapper(parent_widget, option_description)
-			new_option.frame.grid(column = i, row = self.row, padx = 5)
-			self.options.append(new_option)
-			i += 1
+		if "options" in json_conf:
+			for option_description in json_conf["options"]:
+				new_option = OptionWrapper(parent_widget, option_description)
+				new_option.frame.grid(column = i, row = self.row, padx = 5)
+				self.options.append(new_option)
+				i += 1
 
 		self.exec_button = ttk.Button(parent_widget, text = "Start", command = self.execute)
 		self.exec_button.grid(column = nb_max_option + 1, row = self.row, padx = 5)

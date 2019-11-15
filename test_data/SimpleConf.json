@@ -85,7 +85,10 @@
 				"name": "empty_for_test",
 				"scripts": 
 					[
-
+                        {
+                            "name": "dummy bat",
+                            "script": ".\\test_data\\dummy.bat"
+                        }
 					]
 			}
         ]

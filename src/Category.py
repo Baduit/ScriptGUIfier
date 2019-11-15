@@ -19,7 +19,7 @@ class Category:
 	def _get_nb_max_option(self, script_description_list):
 		max = 0
 		for script_description in script_description_list:
-			options = script_description["options"]
+			options = script_description["options"] if "options" in script_description else []
 			if len(options) > max:
 				max = len(options)
 		return max
