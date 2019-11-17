@@ -1,3 +1,5 @@
+import json
+
 import tkinter as tk
 from tkinter import ttk
 
@@ -6,7 +8,7 @@ from Options.InputOption import InputOption
 from Options.ListOption import ListOption
 
 class OptionWrapper:
-	def __init__(self, parent_widget, json_conf):
+	def __init__(self, parent_widget: ttk.Widget, json_conf: json):
 		self.literal = json_conf["literal"] if "literal" in json_conf else ""
 		self.name = json_conf["name"] if "name" in json_conf else self.literal
 		self.type = json_conf["type"]

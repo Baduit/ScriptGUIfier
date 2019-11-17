@@ -7,7 +7,7 @@ from tkinter import ttk
 from OptionWrapper import OptionWrapper
 
 class Script:
-	def __init__(self, parent_widget, json_conf, row, nb_max_option):
+	def __init__(self, parent_widget: ttk.Widget, json_conf: json, row: int, nb_max_option: int):
 		self.script_path = json_conf["script"]
 		self.row = row
 		self.label_name = ttk.Label(parent_widget, text = json_conf["name"])

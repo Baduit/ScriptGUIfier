@@ -6,7 +6,7 @@ from tkinter import ttk
 from Script import Script
 
 class Category:
-	def __init__(self, parent_widget, json_conf):
+	def __init__(self, parent_widget: ttk.Widget, json_conf: json):
 		self.name = json_conf["name"]
 		self.frame = ttk.Frame(parent_widget)
 

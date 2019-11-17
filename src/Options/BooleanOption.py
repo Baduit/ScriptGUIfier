@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import ttk
 
 class BoolOption:
-	def __init__(self, name, parent_widget, json_conf):
+	def __init__(self, name: str, parent_widget: ttk.Widget, json_conf: json):
 		self.check_box_var = tk.IntVar()
 		self.check_box_widget = ttk.Checkbutton(parent_widget, text = name, variable = self.check_box_var)
 		self.frame = self.check_box_widget

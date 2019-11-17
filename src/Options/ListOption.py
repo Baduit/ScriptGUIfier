@@ -6,7 +6,7 @@ import tkinter as tk
 from tkinter import ttk
 
 class ListOption:
-	def __init__(self, name, parent_widget, json_conf):
+	def __init__(self, name: str, parent_widget, json_conf: json):
 		self.frame = ttk.Frame(parent_widget)
 
 		self.label = ttk.Label(self.frame, text = name)
@@ -17,7 +17,7 @@ class ListOption:
 		self.combo_box['values'] = self._extract_default_value(json_conf)
 		self.combo_box.current(0)
 
-	def _extract_default_value(self, json_conf):
+	def _extract_default_value(self, json_conf: json):
 		if "values" in json_conf:
 			return json_conf["values"]
 		elif "values_from_env" in json_conf:
