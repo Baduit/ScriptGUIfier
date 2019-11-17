@@ -10,10 +10,18 @@ class Script:
 	def __init__(self, parent_widget: ttk.Widget, json_conf: json, row: int, nb_max_option: int):
 		self.script_path = json_conf["script"]
 		self.row = row
+
+		self._add_script_name(parent_widget, json_conf, row, nb_max_option)
+		self._add_options(parent_widget, json_conf, row, nb_max_option)
+		self._add_execute_button(parent_widget, json_conf, row, nb_max_option)
+		
+
+	def _add_script_name(self, parent_widget: ttk.Widget, json_conf: json, row: int, nb_max_option: int):
 		self.label_name = ttk.Label(parent_widget, text = json_conf["name"])
 		self.label_name.grid(column = 0, row = self.row, padx = 5, pady = 2, sticky = tk.E + tk.W)
 		self.label_name.config(relief=tk.SOLID)
 
+	def _add_options(self, parent_widget: ttk.Widget, json_conf: json, row: int, nb_max_option: int):
 		self.options = []
 		i = 1
 		if "options" in json_conf:
@@ -23,6 +31,7 @@ class Script:
 				self.options.append(new_option)
 				i += 1
 
+	def _add_execute_button(self, parent_widget: ttk.Widget, json_conf: json, row: int, nb_max_option: int):
 		self.exec_button = ttk.Button(parent_widget, text = "Start", command = self.execute)
 		self.exec_button.grid(column = nb_max_option + 1, row = self.row, padx = 5, pady = 2, sticky = tk.E + tk.W)
 
