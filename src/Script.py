@@ -13,7 +13,10 @@ class Script:
 
 		self._add_script_name(parent_widget, json_conf, row, nb_max_option)
 		self._add_options(parent_widget, json_conf, row, nb_max_option)
+		self._add_last_exec_result(parent_widget, json_conf, row, nb_max_option)
 		self._add_execute_button(parent_widget, json_conf, row, nb_max_option)
+
+		self.process = None
 		
 
 	def _add_script_name(self, parent_widget: ttk.Widget, json_conf: json, row: int, nb_max_option: int):
@@ -31,11 +34,22 @@ class Script:
 				self.options.append(new_option)
 				i += 1
 
-	def _add_execute_button(self, parent_widget: ttk.Widget, json_conf: json, row: int, nb_max_option: int):
-		self.exec_button = ttk.Button(parent_widget, text = "Start", command = self.execute)
-		self.exec_button.grid(column = nb_max_option + 1, row = self.row, padx = 5, pady = 2, sticky = tk.E + tk.W)
+	def _add_last_exec_result(self, parent_widget: ttk.Widget, json_conf: json, row: int, nb_max_option: int):
+		self.last_exec_result = ttk.Label(parent_widget, text = "     ")
+		self.last_exec_result.grid(column = nb_max_option + 1, row = self.row, padx = 5, pady = 2, sticky = tk.E + tk.W)
+		self.last_exec_result.config(relief=tk.SOLID)
 
-	def execute(self):
+	def _add_execute_button(self, parent_widget: ttk.Widget, json_conf: json, row: int, nb_max_option: int):
+		self.exec_button = ttk.Button(parent_widget, text = "Start", command = self.on_execute_button)
+		self.exec_button.grid(column = nb_max_option + 2, row = self.row, padx = 5, pady = 2, sticky = tk.E + tk.W)
+
+	def _update_last_exec_result(self, return_code):
+		if return_code == 0:
+			self.last_exec_result.configure(background = 'green')
+		else:
+			self.last_exec_result.configure(background = 'red')
+
+	def _prepare_cmd(self):
 		cmd = []
 		cmd.append(self.script_path)
 		for opt in self.options:
@@ -50,4 +64,19 @@ class Script:
 					cmd.append(retrieved_value)
 			else:
 				pass # Not supposed to happend. Log? Throw? Show an image with cute kittens?
-		subprocess.Popen(cmd, shell=True)
+		return cmd
+
+	def _execute(self, cmd):
+		self.process = subprocess.Popen(cmd, shell=True)
+		self.check_process_alive()
+
+	def on_execute_button(self):
+		cmd = self._prepare_cmd()
+		self._execute(cmd)
+		
+	def check_process_alive(self):
+		if self.process.poll() is None:
+			self.last_exec_result.after(500, self.check_process_alive)
+		else:
+			self._update_last_exec_result(self.process.returncode)
+			self.process = None
