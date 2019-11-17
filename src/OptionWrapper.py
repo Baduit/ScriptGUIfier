@@ -6,6 +6,7 @@ from tkinter import ttk
 from Options.BooleanOption import BoolOption
 from Options.InputOption import InputOption
 from Options.ListOption import ListOption
+from Options.PathOption import PathOption
 
 class OptionWrapper:
 	def __init__(self, parent_widget: ttk.Widget, json_conf: json):
@@ -20,8 +21,10 @@ class OptionWrapper:
 			if self.literal == "":
 				raise AssertionError("A boolean option MUST have a literal")
 			self.option = BoolOption(self.name, self.frame, json_conf)
-		elif self.type == 'string' or self.type == 'path':
+		elif self.type == 'string':
 			self.option = InputOption(self.name, self.frame, json_conf)
+		elif self.type == 'path':
+			self.option = PathOption(self.name, self.frame, json_conf)
 		elif self.type == 'combo_box':
 			self.option = ListOption(self.name, self.frame, json_conf)
 		else:
