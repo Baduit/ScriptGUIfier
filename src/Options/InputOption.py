@@ -10,11 +10,11 @@ class InputOption:
 		self.frame = ttk.Frame(parent_widget)
 
 		self.label = ttk.Label(self.frame, text = name)
-		self.label.grid(column = 0, row = 0, padx = 5)
+		self.label.grid(column = 0, row = 0, padx = 5, pady = 2)
 
 		self.input_value = tk.StringVar()
 		self.input_widget = ttk.Entry(self.frame, textvariable = self.input_value)
-		self.input_widget.grid(column = 1, row = 0, padx = 5)
+		self.input_widget.grid(column = 1, row = 0, padx = 5, pady = 2)
 		self.input_value.set(self._extract_default_value(json_conf))
 
 	def _extract_default_value(self, json_conf):

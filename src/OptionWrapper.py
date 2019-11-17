@@ -27,7 +27,7 @@ class OptionWrapper:
 			print("Option: " + self.name + " unknown option type: " + self.type)
 		
 		if process_good:
-			self.option.frame.grid(column = 0, row = 0, padx = 5)
+			self.option.frame.grid(column = 0, row = 0, padx = 5, pady = 2)
 
 	def retrieve_value(self):
 		return self.option.retrieve_value()
