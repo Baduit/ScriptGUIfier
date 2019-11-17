@@ -14,7 +14,7 @@ if args.pretty:
 else:
 	print("This is not pretty :'(", args.other)
 
-#time.sleep(5)
+time.sleep(5)
 
 """ while True:
 	pass """

@@ -71,12 +71,21 @@ class Script:
 		self.check_process_alive()
 
 	def on_execute_button(self):
-		cmd = self._prepare_cmd()
-		self._execute(cmd)
+		if self.process is None:
+			cmd = self._prepare_cmd()
+			self._execute(cmd)
+			self.exec_button.configure(text = "Stop")
+		else:
+			self.process.kill()
+			self.process = None
+			self._update_last_exec_result(1)
+			self.exec_button.configure(text = "Start")
 		
 	def check_process_alive(self):
-		if self.process.poll() is None:
-			self.last_exec_result.after(500, self.check_process_alive)
-		else:
-			self._update_last_exec_result(self.process.returncode)
-			self.process = None
+		if self.process is not None:
+			if self.process.poll() is None:
+				self.last_exec_result.after(100, self.check_process_alive)
+			else:
+				self._update_last_exec_result(self.process.returncode)
+				self.process = None
+				self.exec_button.configure(text = "Start")
