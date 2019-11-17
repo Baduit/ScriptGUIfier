@@ -11,7 +11,7 @@ class Script:
 		self.script_path = json_conf["script"]
 		self.row = row
 		self.label_name = ttk.Label(parent_widget, text = json_conf["name"])
-		self.label_name.grid(column = 0, row = self.row, padx = 5, pady = 2)
+		self.label_name.grid(column = 0, row = self.row, padx = 5, pady = 2, sticky = tk.E + tk.W)
 		self.label_name.config(relief=tk.SOLID)
 
 		self.options = []
@@ -19,12 +19,12 @@ class Script:
 		if "options" in json_conf:
 			for option_description in json_conf["options"]:
 				new_option = OptionWrapper(parent_widget, option_description)
-				new_option.frame.grid(column = i, row = self.row, padx = 5, pady = 2)
+				new_option.frame.grid(column = i, row = self.row, padx = 5, pady = 2, sticky = tk.E + tk.W)
 				self.options.append(new_option)
 				i += 1
 
 		self.exec_button = ttk.Button(parent_widget, text = "Start", command = self.execute)
-		self.exec_button.grid(column = nb_max_option + 1, row = self.row, padx = 5, pady = 2)
+		self.exec_button.grid(column = nb_max_option + 1, row = self.row, padx = 5, pady = 2, sticky = tk.E + tk.W)
 
 	def execute(self):
 		cmd = []

@@ -10,7 +10,6 @@ from Category import Category
 class GUI:
 	def __init__(self, json_conf):
 		self.form = tk.Tk()
-		self.form.geometry("1500x280")
 		self.set_name(json_conf["app_name"])
 
 		self.categories = []
@@ -29,6 +28,5 @@ class GUI:
 		self._name = name
 		self.form.winfo_toplevel().title(self._name)
 		
-
 	def main_loop(self):
 		self.form.mainloop()
