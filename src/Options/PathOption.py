@@ -19,7 +19,7 @@ class PathOption:
 		self.path_type = json_conf["path_type"] if "path_type" in json_conf else "files"
 
 		self.label = ttk.Label(self.frame, text = self.name)
-		self.label.grid(column = 0, row = 0, padx = 5, pady = 2)
+		self.label.grid(column = 0, row = 0, padx = 5, pady = 2, sticky = tk.E + tk.W)
 
 		self.input_value = tk.StringVar()
 		self.input_widget = ttk.Entry(self.frame, textvariable = self.input_value)
@@ -27,7 +27,7 @@ class PathOption:
 		self.input_value.set(self._extract_default_value(json_conf))
 
 		self.choose_path_button = ttk.Button(self.frame, text = 'Choose', command = self.choose_path) # Change by an image of a folder?
-		self.choose_path_button.grid(column = 2, row = 0, padx = 5, pady = 2)
+		self.choose_path_button.grid(column = 2, row = 0, padx = 5, pady = 2, sticky = tk.E + tk.W)
 
 	def _extract_default_value(self, json_conf):
 		if "default_value" in json_conf:

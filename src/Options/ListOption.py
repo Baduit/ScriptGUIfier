@@ -14,10 +14,10 @@ class ListOption:
 		self.frame = ttk.Frame(parent_widget)
 
 		self.label = ttk.Label(self.frame, text = self.name)
-		self.label.grid(column = 0, row = 0, padx = 5, pady = 2)
+		self.label.grid(column = 0, row = 0, padx = 5, pady = 2, sticky = tk.E + tk.W)
 
 		self.combo_box = ttk.Combobox(self.frame)
-		self.combo_box.grid(column = 1, row = 0, padx = 5, pady = 2)
+		self.combo_box.grid(column = 1, row = 0, padx = 5, pady = 2, sticky = tk.E + tk.W)
 		self.combo_box['values'] = self._extract_default_value(json_conf)
 		self.combo_box.current(0)
 

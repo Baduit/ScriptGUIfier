@@ -29,10 +29,21 @@ class Script:
 		i = 1
 		if "options" in json_conf:
 			for option_description in json_conf["options"]:
-				new_option = OptionWrapper(parent_widget, option_description)
-				new_option.frame.grid(column = i, row = self.row, padx = 5, pady = 2, sticky = tk.E + tk.W)
-				self.options.append(new_option)
-				i += 1
+				group = option_description["group"] if "group" in option_description else None
+				option_with_group = self._find_wrapper_by_group(group) if group is not None else None
+				if  option_with_group is None:
+					new_option = OptionWrapper(parent_widget, option_description)
+					new_option.frame.grid(column = i, row = self.row, padx = 5, pady = 2, sticky = tk.E + tk.W)
+					self.options.append(new_option)
+					i += 1
+				else:
+					option_with_group.add_option(option_description)
+	
+	def _find_wrapper_by_group(self, group: str):
+		for option in self.options:
+			if option.group == group:
+				return option
+		return None
 
 	def _add_last_exec_result(self, parent_widget: ttk.Widget, json_conf: json, row: int, nb_max_option: int):
 		self.last_exec_result = ttk.Label(parent_widget, text = "     ")
