@@ -36,3 +36,18 @@ class OptionWrapper:
 
 	def retrieve_value(self):
 		return self.option.retrieve_value()
+
+	def prepare_argument(self):
+		arg = []
+		if self.type == 'boolean':
+			if self.retrieve_value():
+				arg.append(self.literal)
+		elif self.type == 'string' or self.type == 'path' or self.type == 'combo_box':
+			retrieved_value = self.retrieve_value()
+			if retrieved_value != '':
+				if self.literal != "":
+					arg.append(self.literal)
+				arg.append(retrieved_value)
+		else:
+			pass # Not supposed to happend. Log? Throw? Show an image with cute kittens?
+		return arg

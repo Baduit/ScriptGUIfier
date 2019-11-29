@@ -53,17 +53,7 @@ class Script:
 		cmd = []
 		cmd.append(self.script_path)
 		for opt in self.options:
-			if opt.type == 'boolean':
-				if opt.retrieve_value():
-					cmd.append(opt.literal)
-			elif opt.type == 'string' or opt.type == 'path' or opt.type == 'combo_box':
-				retrieved_value = opt.retrieve_value()
-				if retrieved_value != '':
-					if opt.literal != "":
-						cmd.append(opt.literal)
-					cmd.append(retrieved_value)
-			else:
-				pass # Not supposed to happend. Log? Throw? Show an image with cute kittens?
+			cmd += opt.prepare_argument()
 		return cmd
 
 	def _execute(self, cmd):

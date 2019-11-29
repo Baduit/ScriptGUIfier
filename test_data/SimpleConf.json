@@ -61,6 +61,7 @@
                                     },
                                     {
                                         "name": "sentence to say",
+                                        "group": "awesome",
                                         "type": "string",
                                         "default_value": "none",
 										"description": "this is a description!",
@@ -68,6 +69,7 @@
                                     },
                                     {
                                         "name": "not pretty sentence",
+                                        "group": "awesome",
                                         "type": "combo_box",
                                         "values": 
                                             [
