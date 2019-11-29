@@ -6,10 +6,14 @@ import tkinter as tk
 from tkinter import ttk
 
 class ListOption:
-	def __init__(self, name: str, parent_widget, json_conf: json):
+	def __init__(self, parent_widget, json_conf: json):
+		self.literal = json_conf["literal"] if "literal" in json_conf else ""
+		self.name = json_conf["name"] if "name" in json_conf else self.literal
+		self.type = json_conf["type"]
+
 		self.frame = ttk.Frame(parent_widget)
 
-		self.label = ttk.Label(self.frame, text = name)
+		self.label = ttk.Label(self.frame, text = self.name)
 		self.label.grid(column = 0, row = 0, padx = 5, pady = 2)
 
 		self.combo_box = ttk.Combobox(self.frame)
