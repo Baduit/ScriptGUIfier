@@ -1,6 +1,7 @@
 import json
 import os
 import subprocess
+import sys
 
 import tkinter as tk
 from tkinter import ttk
@@ -8,6 +9,10 @@ from tkinter.filedialog import askopenfilename
 from tkinter.filedialog import askopenfilenames
 from tkinter.filedialog import askdirectory
 
+if sys.platform == "win32":
+	ping_option = "-n"
+else: # I assume that the ping command works the same way as the Linux one in every other plaform
+	ping_option = "-c"
 
 class AddrOption:
 	def __init__(self, parent_widget, json_conf):
@@ -52,7 +57,7 @@ class AddrOption:
 	# Only work on windows I need to make it cross platform "ping -c 1" + self.retrieve_value() + ">> /dev/null"
 	def _ping(self):
 		if self.ping_process is None:
-			self.ping_process = subprocess.Popen(["ping", "-n", "1", self.retrieve_value()], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+			self.ping_process = subprocess.Popen(["ping", ping_option, "1", self.retrieve_value()], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
 		else:
 			if self.ping_process.poll() is not None:
 				if self.ping_process.returncode == 0: 
