@@ -52,7 +52,7 @@ class AddrOption:
 	# Only work on windows I need to make it cross platform "ping -c 1" + self.retrieve_value() + ">> /dev/null"
 	def _ping(self):
 		if self.ping_process is None:
-			self.ping_process = subprocess.Popen(["ping", "-n", "1", self.retrieve_value()], stdout=subprocess.PIPE, shell=True)
+			self.ping_process = subprocess.Popen(["ping", "-n", "1", self.retrieve_value()], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
 		else:
 			if self.ping_process.poll() is not None:
 				if self.ping_process.returncode == 0: 
