@@ -89,7 +89,17 @@
 					[
                         {
                             "name": "dummy bat",
-                            "script": ".\\test_data\\dummy.bat"
+                            "script": ".\\test_data\\dummy.bat",
+                            "options":
+                                [
+                                    {
+                                        "name": "addr",
+                                        "type": "ip_addr",
+                                        "default_value": "127.0.0.1",
+										"description": "this is a description!",
+										"literal": "--addr"
+                                    } 
+                                ]
                         }
 					]
 			}

@@ -7,6 +7,7 @@ from Options.BooleanOption import BoolOption
 from Options.InputOption import InputOption
 from Options.ListOption import ListOption
 from Options.PathOption import PathOption
+from Options.AddrOption import AddrOption
 
 class OptionWrapper:
 	def __init__(self, parent_widget: ttk.Widget, json_conf: json):
@@ -30,6 +31,8 @@ class OptionWrapper:
 			option = PathOption(self.frame, json_conf)
 		elif json_conf["type"] == 'combo_box':
 			option = ListOption(self.frame, json_conf)
+		elif json_conf["type"] == 'ip_addr':
+			option = AddrOption(self.frame, json_conf)
 		else:
 			process_good = False
 			print("Option: " + literal + " unknown option type: " + json_conf["type"])
