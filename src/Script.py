@@ -21,7 +21,7 @@ class Script:
 
 	def _add_script_name(self, parent_widget: ttk.Widget, json_conf: json, row: int, nb_max_option: int):
 		self.label_name = ttk.Label(parent_widget, text = json_conf["name"])
-		self.label_name.grid(column = 0, row = self.row, padx = 5, pady = 2, sticky = tk.E + tk.W)
+		self.label_name.grid(column = 0, row = self.row, padx = 5, pady = 2, sticky = tk.E + tk.W + tk.N + tk.S)
 		self.label_name.config(relief=tk.SOLID)
 
 	def _add_options(self, parent_widget: ttk.Widget, json_conf: json, row: int, nb_max_option: int):
