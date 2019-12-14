@@ -47,7 +47,7 @@ class OptionWrapper:
 			if option.type == 'boolean':
 				if option.retrieve_value():
 					arg.append(option.literal)
-			elif option.type == 'string' or option.type == 'path' or option.type == 'combo_box':
+			elif option.type == 'string' or option.type == 'path' or option.type == 'combo_box' or option.type == 'ip_addr':
 				retrieved_value = option.retrieve_value()
 				if retrieved_value != '':
 					if option.literal != "":
