@@ -7,9 +7,10 @@ from tkinter import ttk
 from OptionWrapper import OptionWrapper
 
 class Script:
-	def __init__(self, parent_widget: ttk.Widget, json_conf: json, row: int, nb_max_option: int):
+	def __init__(self, parent_widget: ttk.Widget, json_conf: json, category_options, row: int, nb_max_option: int):
 		self.script_path = json_conf["script"]
 		self.row = row
+		self.category_options = category_options
 
 		self._add_script_name(parent_widget, json_conf, row, nb_max_option)
 		self._add_options(parent_widget, json_conf, row, nb_max_option)
@@ -63,6 +64,8 @@ class Script:
 	def _prepare_cmd(self):
 		cmd = []
 		cmd.append(self.script_path)
+		for cat_opt in self.category_options:
+			cmd += cat_opt.prepare_argument()
 		for opt in self.options:
 			cmd += opt.prepare_argument()
 		return cmd

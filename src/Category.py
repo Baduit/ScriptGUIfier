@@ -47,6 +47,6 @@ class Category:
 	def _create_scripts(self, json_conf: json):
 		self.scripts = []
 		for i, script_description in enumerate(json_conf["scripts"]):
-			new_script = Script(self.scripts_frame, script_description, i, self.nb_max_option)
+			new_script = Script(self.scripts_frame, script_description, self.options, i, self.nb_max_option)
 			self.scripts.append(new_script)
 		
