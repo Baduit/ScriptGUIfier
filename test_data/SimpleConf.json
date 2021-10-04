@@ -1,0 +1,111 @@
+{
+	"app_name": "SimpleConf",
+    "categories":
+        [
+            {
+                "name": "svn utils",
+                "scripts":
+                    [
+                        {
+                            "name": "checkout",
+                            "script": "C:/path/to/the/script",
+                            "options":
+                                [
+                                    {
+                                        "type": "boolean",
+                                        "default_value": true,
+										"description": "this is a description!",
+										"literal": "--fast_mode"
+                                    },
+                                    {
+                                        "name": "username",
+                                        "type": "string",
+                                        "default_value_from_env": "USERNAME",
+										"description": "this is a description!",
+										"literal": "--username"
+                                    },
+                                    {
+                                        "name": "path_to_checkout",
+                                        "type": "path",
+                                        "default_value_from_script": "echo lol",
+										"description": "this is a description!",
+										"literal": "--dir"
+                                    }                                
+                                ]
+						},
+						{
+                            "name": "dummy",
+                            "script": ".\\test_data\\dummy.bat",
+                            "options":
+                                [      
+                                    {
+                                        "name": "list",
+                                        "type": "combo_box",
+                                        "values_from_script": ".\\test_data\\echo_lines.bat",
+										"description": "this is a description!",
+										"literal": "--not-a-literal" 
+                                    }                          
+                                ]
+                        },
+						{
+                            "name": "dummy py",
+                            "script": ".\\test_data\\dummy.py",
+                            "options":
+                                [
+                                    {
+                                        "name": "pretty?",
+                                        "type": "boolean",
+                                        "default_value": true,
+										"description": "this is a description!",
+										"literal": "--pretty"
+                                    },
+                                    {
+                                        "name": "sentence to say",
+                                        "group": "awesome",
+                                        "type": "string",
+                                        "default_value": "none",
+										"description": "this is a description!",
+										"literal": "--endpoint"
+                                    },
+                                    {
+                                        "name": "not pretty sentence",
+                                        "group": "awesome",
+                                        "type": "combo_box",
+                                        "values": 
+                                            [
+                                                "Hey",
+                                                "Yo"
+                                            ],
+										"description": "this is a description!",
+										"literal": "--other"
+                                    }                                 
+                                ]
+                        }
+                    ]
+			},
+			{
+                "name": "empty_for_test",
+                "options":
+                    [
+                        {
+                            "name": "addr",
+                            "type": "ip_addr",
+                            "default_value": "127.0.0.1",
+                            "description": "this is a description!",
+                            "literal": "--addr"
+                        }
+                    ],
+				"scripts": 
+					[
+                        {
+                            "name": "dummy bat",
+                            "script": ".\\test_data\\dummy.bat",
+                            "options":
+                                [
+                                    
+                                ]
+                        }
+					]
+			}
+        ]
+}
