@@ -38,5 +38,5 @@ An __Option__ describes the arguments your program takes. It has a several attri
 - __values__: 
 
 ## TODO
-See: https://github.com/Baduit/ScriptGUIfier/projects/1
+See: https://github.com/Baduit/ScriptGUIfier/projects/2
 
