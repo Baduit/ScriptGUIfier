@@ -3,11 +3,7 @@ import json
 import tkinter as tk
 from tkinter import ttk
 
-from Options.BooleanOption import BoolOption
-from Options.InputOption import InputOption
-from Options.ListOption import ListOption
-from Options.PathOption import PathOption
-from Options.AddrOption import AddrOption
+from Options import BoolOption, InputOption, ListOption, PathOption, AddrOption
 
 class OptionWrapper:
 	def __init__(self, parent_widget: ttk.Widget, json_conf: json):
